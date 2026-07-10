@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Department of Treasury and Finance — Infrastructure Division</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="top-bar"></div>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-kicker">Victoria State Government</div>
+    <h1 class="hero-title">Department of Treasury and Finance</h1>
+    <div class="hero-divider"></div>
+    <p class="hero-sub">Infrastructure Division</p>
+    <p class="hero-sub">Data Analytics Team</p>
+  </div>
+</section>
+
+<section class="dashboard">
+  <div class="dashboard-inner">
+    <div class="dashboard-head">
+      <h2>Victoria at a glance</h2>
+      <p>Selected public data from the Victorian Budget and Victoria in Future, published via
+        <a href="https://www.data.vic.gov.au/" target="_blank" rel="noopener">data.vic.gov.au</a> and
+        <a href="https://www.dtf.vic.gov.au/" target="_blank" rel="noopener">dtf.vic.gov.au</a>
+      </p>
+    </div>
+
+    <div class="chart-grid">
+
+      <div class="chart-card">
+        <div class="chart-card-head">
+          <h3>Victoria's population</h3>
+          <span class="tag tag-blue">Millions</span>
+        </div>
+        <p class="chart-card-desc">Estimated resident population, with Victoria in Future 2023 projection</p>
+        <div id="pop-chart" class="chart-mount"></div>
+        <p class="chart-source">Source: ABS Estimated Resident Population; Victoria in Future 2023, planning.vic.gov.au</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-card-head">
+          <h3>Government infrastructure investment</h3>
+          <span class="tag tag-purple">$ billion</span>
+        </div>
+        <p class="chart-card-desc">Peaked 2023-24, moderating through the forward estimates</p>
+        <div class="chart-mount-canvas">
+          <canvas id="gii-chart"></canvas>
+        </div>
+        <p class="chart-source">Source: Budget Paper No. 4, State Capital Program, budget.vic.gov.au</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-card-head">
+          <h3>State budget aggregates, 2025-26</h3>
+          <span class="tag tag-blue">$ billion</span>
+        </div>
+        <p class="chart-card-desc">Revenue vs. expenditure, and expenditure growth to 2028-29</p>
+        <div id="budget-chart" class="chart-mount"></div>
+        <p class="chart-source">Source: 2025-26 Victorian Budget, dtf.vic.gov.au</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-card-head">
+          <h3>Net debt to GSP</h3>
+          <span class="tag tag-purple">Per cent</span>
+        </div>
+        <p class="chart-card-desc">Projected to stabilise and begin declining by 2028-29</p>
+        <div class="chart-mount-canvas">
+          <canvas id="debt-chart"></canvas>
+        </div>
+        <p class="chart-source">Source: 2025-26 Victorian Budget, dtf.vic.gov.au</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Vendor libraries (D3.js, Chart.js) -->
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<!-- Page logic -->
+<script src="js/charts.js"></script>
+
+</body>
+</html>

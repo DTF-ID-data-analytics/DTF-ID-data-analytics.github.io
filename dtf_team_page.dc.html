@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { font-family: 'Public Sans', system-ui, sans-serif; }
+  a { color: #0060a8; }
+  a:hover { color: #004a82; }
+</style>
+</helmet>
+<div style="min-height:100vh;display:flex;flex-direction:column;background:#f4f5f6;color:#0f1419;">
+  <div style="height:6px;background:linear-gradient(90deg,#0060a8,#6b3fa0);width:100%;"></div>
+
+  <section style="padding:56px 24px 32px;display:flex;align-items:center;justify-content:center;">
+    <div style="max-width:760px;text-align:center;">
+      <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#0060a8;margin-bottom:28px;">Victoria State Government</div>
+      <h1 style="margin:0;font-size:44px;line-height:1.18;font-weight:700;letter-spacing:-0.01em;">Department of Treasury and Finance</h1>
+      <div style="width:64px;height:3px;background:linear-gradient(90deg,#0060a8,#6b3fa0);margin:28px auto;border-radius:2px;"></div>
+      <p style="margin:0;font-size:24px;line-height:1.35;font-weight:500;color:#3a444d;">Infrastructure Division</p>
+      <p style="margin:6px 0 0;font-size:24px;line-height:1.35;font-weight:500;color:#3a444d;">Data Analytics Team</p>
+    </div>
+  </section>
+
+  <section style="flex:1;padding:24px 24px 72px;display:flex;flex-direction:column;align-items:center;">
+    <div style="max-width:1180px;width:100%;">
+      <div style="text-align:center;margin-bottom:36px;">
+        <h2 style="margin:0;font-size:26px;font-weight:700;color:#1a1f29;">Victoria at a glance</h2>
+        <p style="margin:8px 0 0;font-size:15px;color:#5c6570;">Selected public data from the Victorian Budget and Victoria in Future, published via <a href="https://www.data.vic.gov.au/" target="_blank" rel="noopener">data.vic.gov.au</a> and <a href="https://www.dtf.vic.gov.au/" target="_blank" rel="noopener">dtf.vic.gov.au</a></p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(320px,1fr));gap:24px;">
+
+        <div style="background:#ffffff;border-radius:12px;padding:24px 24px 18px;box-shadow:0 1px 3px rgba(15,23,42,0.08);">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:2px;">
+            <h3 style="margin:0;font-size:16px;font-weight:700;color:#1a1f29;">Victoria's population</h3>
+            <span style="font-size:11px;font-weight:600;color:#0060a8;background:#e8f0fa;padding:3px 8px;border-radius:20px;">Millions</span>
+          </div>
+          <p style="margin:2px 0 12px;font-size:13px;color:#7a8390;">Estimated resident population, with Victoria in Future 2023 projection</p>
+          <div style="width:100%;" ref="{{ popRef }}"></div>
+          <p style="margin:14px 0 0;font-size:11px;color:#9aa2ac;">Source: ABS Estimated Resident Population; Victoria in Future 2023, planning.vic.gov.au</p>
+        </div>
+
+        <div style="background:#ffffff;border-radius:12px;padding:24px 24px 18px;box-shadow:0 1px 3px rgba(15,23,42,0.08);">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:2px;">
+            <h3 style="margin:0;font-size:16px;font-weight:700;color:#1a1f29;">Government infrastructure investment</h3>
+            <span style="font-size:11px;font-weight:600;color:#6b3fa0;background:#f1e9f8;padding:3px 8px;border-radius:20px;">$ billion</span>
+          </div>
+          <p style="margin:2px 0 12px;font-size:13px;color:#7a8390;">Peaked 2023-24, moderating through the forward estimates</p>
+          <div style="position:relative;height:260px;">
+            <canvas ref="{{ giiRef }}"></canvas>
+          </div>
+          <p style="margin:14px 0 0;font-size:11px;color:#9aa2ac;">Source: Budget Paper No. 4, State Capital Program, budget.vic.gov.au</p>
+        </div>
+
+        <div style="background:#ffffff;border-radius:12px;padding:24px 24px 18px;box-shadow:0 1px 3px rgba(15,23,42,0.08);">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:2px;">
+            <h3 style="margin:0;font-size:16px;font-weight:700;color:#1a1f29;">State budget aggregates, 2025-26</h3>
+            <span style="font-size:11px;font-weight:600;color:#0060a8;background:#e8f0fa;padding:3px 8px;border-radius:20px;">$ billion</span>
+          </div>
+          <p style="margin:2px 0 12px;font-size:13px;color:#7a8390;">Revenue vs. expenditure, and expenditure growth to 2028-29</p>
+          <div style="width:100%;" ref="{{ budgetRef }}"></div>
+          <p style="margin:14px 0 0;font-size:11px;color:#9aa2ac;">Source: 2025-26 Victorian Budget, dtf.vic.gov.au</p>
+        </div>
+
+        <div style="background:#ffffff;border-radius:12px;padding:24px 24px 18px;box-shadow:0 1px 3px rgba(15,23,42,0.08);">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:2px;">
+            <h3 style="margin:0;font-size:16px;font-weight:700;color:#1a1f29;">Net debt to GSP</h3>
+            <span style="font-size:11px;font-weight:600;color:#6b3fa0;background:#f1e9f8;padding:3px 8px;border-radius:20px;">Per cent</span>
+          </div>
+          <p style="margin:2px 0 12px;font-size:13px;color:#7a8390;">Projected to stabilise and begin declining by 2028-29</p>
+          <div style="position:relative;height:260px;">
+            <canvas ref="{{ debtRef }}"></canvas>
+          </div>
+          <p style="margin:14px 0 0;font-size:11px;color:#9aa2ac;">Source: 2025-26 Victorian Budget, dtf.vic.gov.au</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.popRef = React.createRef();
+    this.giiRef = React.createRef();
+    this.budgetRef = React.createRef();
+    this.debtRef = React.createRef();
+  }
+
+  componentDidMount() {
+    this.drawPopulation();
+    this.drawGII();
+    this.drawBudget();
+    this.drawDebt();
+  }
+
+  // D3: population line chart
+  drawPopulation() {
+    const el = this.popRef.current;
+    if (!el || !window.d3) return;
+    const d3 = window.d3;
+    const data = [
+      { label: '2024', year: 2024, value: 6.98, type: 'actual' },
+      { label: 'Sep 2025', year: 2025, value: 7.10, type: 'actual' },
+      { label: '2051 (proj.)', year: 2051, value: 10.3, type: 'projected' }
+    ];
+    const width = el.clientWidth || 480;
+    const height = 260;
+    const margin = { top: 16, right: 20, bottom: 30, left: 40 };
+    d3.select(el).selectAll('*').remove();
+    const svg = d3.select(el).append('svg')
+      .attr('viewBox', `0 0 ${width} ${height}`)
+      .attr('width', '100%')
+      .attr('height', height);
+
+    const x = d3.scaleLinear().domain([2024, 2051]).range([margin.left, width - margin.right]);
+    const y = d3.scaleLinear().domain([6, 11]).range([height - margin.bottom, margin.top]);
+
+    svg.append('g')
+      .attr('transform', `translate(0,${height - margin.bottom})`)
+      .call(d3.axisBottom(x).tickValues([2024, 2025, 2051]).tickFormat(d3.format('d')))
+      .call(g => g.selectAll('text').attr('font-size', 11).attr('fill', '#5c6570'))
+      .call(g => g.selectAll('line,path').attr('stroke', '#dfe3e8'));
+
+    svg.append('g')
+      .attr('transform', `translate(${margin.left},0)`)
+      .call(d3.axisLeft(y).ticks(5))
+      .call(g => g.selectAll('text').attr('font-size', 11).attr('fill', '#5c6570'))
+      .call(g => g.selectAll('line,path').attr('stroke', '#dfe3e8'));
+
+    const line = d3.line().x(d => x(d.year)).y(d => y(d.value)).curve(d3.curveMonotoneX);
+    svg.append('path')
+      .datum(data)
+      .attr('fill', 'none')
+      .attr('stroke', '#0060a8')
+      .attr('stroke-width', 3)
+      .attr('d', line);
+
+    svg.selectAll('circle')
+      .data(data)
+      .join('circle')
+      .attr('cx', d => x(d.year))
+      .attr('cy', d => y(d.value))
+      .attr('r', 5)
+      .attr('fill', d => d.type === 'projected' ? '#6b3fa0' : '#0060a8')
+      .attr('stroke', '#fff')
+      .attr('stroke-width', 2);
+
+    svg.selectAll('.lbl')
+      .data(data)
+      .join('text')
+      .attr('class', 'lbl')
+      .attr('x', d => x(d.year))
+      .attr('y', d => y(d.value) - 14)
+      .attr('text-anchor', d => d.year === 2051 ? 'end' : 'middle')
+      .attr('font-size', 12)
+      .attr('font-weight', 600)
+      .attr('fill', '#1a1f29')
+      .text(d => `${d.value}M`);
+  }
+
+  // Chart.js: government infrastructure investment bar chart
+  drawGII() {
+    const canvas = this.giiRef.current;
+    if (!canvas || !window.Chart) return;
+    new window.Chart(canvas, {
+      type: 'bar',
+      data: {
+        labels: ['2023-24', '2025-26', '2029-30'],
+        datasets: [{
+          label: 'Infrastructure investment ($bn)',
+          data: [24.2, 21.4, 15.3],
+          backgroundColor: ['#0060a8', '#3d7ec4', '#6b3fa0'],
+          borderRadius: 6,
+          maxBarThickness: 70
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: (ctx) => `$${ctx.parsed.y}bn` } }
+        },
+        scales: {
+          y: { beginAtZero: true, grid: { color: '#eef0f2' }, ticks: { callback: (v) => `$${v}bn`, color: '#5c6570', font: { size: 11 } } },
+          x: { grid: { display: false }, ticks: { color: '#5c6570', font: { size: 11 } } }
+        }
+      }
+    });
+  }
+
+  // D3: budget aggregates grouped bars
+  drawBudget() {
+    const el = this.budgetRef.current;
+    if (!el || !window.d3) return;
+    const d3 = window.d3;
+    const groups = [
+      { label: '2025-26', values: [{ key: 'Revenue', v: 108.3 }, { key: 'Expenditure', v: 107.7 }] },
+      { label: '2028-29', values: [{ key: 'Expenditure', v: 115.4 }] }
+    ];
+    const width = el.clientWidth || 480;
+    const height = 260;
+    const margin = { top: 16, right: 20, bottom: 30, left: 40 };
+    d3.select(el).selectAll('*').remove();
+    const svg = d3.select(el).append('svg')
+      .attr('viewBox', `0 0 ${width} ${height}`)
+      .attr('width', '100%')
+      .attr('height', height);
+
+    const x0 = d3.scaleBand().domain(groups.map(g => g.label)).range([margin.left, width - margin.right]).paddingOuter(0.3).paddingInner(0.4);
+    const x1 = d3.scaleBand().domain(['Revenue', 'Expenditure']).range([0, x0.bandwidth()]).padding(0.15);
+    const y = d3.scaleLinear().domain([0, 130]).range([height - margin.bottom, margin.top]);
+    const color = { Revenue: '#0060a8', Expenditure: '#6b3fa0' };
+
+    svg.append('g')
+      .attr('transform', `translate(0,${height - margin.bottom})`)
+      .call(d3.axisBottom(x0))
+      .call(g => g.selectAll('text').attr('font-size', 11).attr('fill', '#5c6570'))
+      .call(g => g.selectAll('line,path').attr('stroke', '#dfe3e8'));
+
+    svg.append('g')
+      .attr('transform', `translate(${margin.left},0)`)
+      .call(d3.axisLeft(y).ticks(5).tickFormat(d => `$${d}bn`))
+      .call(g => g.selectAll('text').attr('font-size', 11).attr('fill', '#5c6570'))
+      .call(g => g.selectAll('line,path').attr('stroke', '#dfe3e8'));
+
+    const group = svg.selectAll('.grp')
+      .data(groups)
+      .join('g')
+      .attr('transform', d => `translate(${x0(d.label)},0)`);
+
+    group.selectAll('rect')
+      .data(d => d.values)
+      .join('rect')
+      .attr('x', d => x1(d.key))
+      .attr('width', x1.bandwidth())
+      .attr('y', d => y(d.v))
+      .attr('height', d => y(0) - y(d.v))
+      .attr('rx', 5)
+      .attr('fill', d => color[d.key]);
+
+    group.selectAll('.val')
+      .data(d => d.values)
+      .join('text')
+      .attr('class', 'val')
+      .attr('x', d => x1(d.key) + x1.bandwidth() / 2)
+      .attr('y', d => y(d.v) - 8)
+      .attr('text-anchor', 'middle')
+      .attr('font-size', 11)
+      .attr('font-weight', 600)
+      .attr('fill', '#1a1f29')
+      .text(d => `$${d.v}bn`);
+
+    svg.append('g')
+      .attr('transform', `translate(${width - margin.right - 150},${margin.top})`)
+      .call(g => {
+        Object.entries(color).forEach(([key, c], i) => {
+          const row = g.append('g').attr('transform', `translate(${i * 78},0)`);
+          row.append('rect').attr('width', 10).attr('height', 10).attr('rx', 2).attr('fill', c);
+          row.append('text').attr('x', 15).attr('y', 9).attr('font-size', 11).attr('fill', '#5c6570').text(key);
+        });
+      });
+  }
+
+  // Chart.js: net debt to GSP line chart
+  drawDebt() {
+    const canvas = this.debtRef.current;
+    if (!canvas || !window.Chart) return;
+    new window.Chart(canvas, {
+      type: 'line',
+      data: {
+        labels: ['Jun 2027', 'Jun 2028', 'Jun 2029'],
+        datasets: [{
+          label: 'Net debt to GSP (%)',
+          data: [25.2, 25.0, 24.9],
+          borderColor: '#6b3fa0',
+          backgroundColor: 'rgba(107,63,160,0.12)',
+          pointBackgroundColor: '#6b3fa0',
+          pointRadius: 5,
+          borderWidth: 3,
+          fill: true,
+          tension: 0.3
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: (ctx) => `${ctx.parsed.y}%` } }
+        },
+        scales: {
+          y: { min: 24, max: 26, grid: { color: '#eef0f2' }, ticks: { callback: (v) => `${v}%`, color: '#5c6570', font: { size: 11 } } },
+          x: { grid: { display: false }, ticks: { color: '#5c6570', font: { size: 11 } } }
+        }
+      }
+    });
+  }
+
+  renderVals() {
+    return {
+      popRef: this.popRef,
+      giiRef: this.giiRef,
+      budgetRef: this.budgetRef,
+      debtRef: this.debtRef
+    };
+  }
+}
+</script>
+</body>
+</html>
