@@ -1,6 +1,3 @@
-# web_page
-Front-end web page for Victoria State Department of Treasury and Finance, Infrastructure Division, project version control.
-
 # DTF Infrastructure Division — Static GitHub Pages site
 
 A lightweight static landing page for GitHub Pages.
