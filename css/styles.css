@@ -1,5 +1,5 @@
 :root {
-  /* Core Palette Variables */
+  /* Core Palette variables */
   --navy: #002244;
   --gold: #A88B3E;
   --blue: #0080ff;
@@ -7,7 +7,7 @@
   --paper: #1c1c1c;
   --ink: #F5F4F0;
 
-  /* LIGHT SIDE COLORS */
+  /* Light theme */
   --bg-light: #f3f1eb;
   --fg-light: #151515;
   --navy-light: #001f3f;
@@ -17,7 +17,7 @@
   --border-light: rgba(21, 21, 21, 0.18);
   --btn-border-light: #0055ff;
 
-  /* DARK SIDE COLORS */
+  /* Dark theme */
   --bg-dark: #1c1c1c;
   --fg-dark: #F5F4F0;
   --cyan-dark: #00d4ff;
@@ -45,7 +45,6 @@ body {
   position: relative;
 }
 
-/* Layer Layout for Synchronous Scrolling Split */
 .site-layer {
   width: 100%;
   min-height: 100vh;
@@ -98,7 +97,7 @@ body.mode-dark .layer-dark {
   pointer-events: auto;
 }
 
-/* --- HEADER & BRANDING --- */
+/* Header */
 .site-header {
   display: flex;
   justify-content: space-between;
@@ -197,7 +196,7 @@ body.mode-dark .layer-dark {
   opacity: 0.85;
 }
 
-/* --- MAIN CONTENT & HERO --- */
+/* Body */
 main {
   padding: 0 clamp(20px, 5vw, 72px);
 }
@@ -257,7 +256,7 @@ main {
   color: var(--color-fg);
 }
 
-/* --- ABOUT SECTION --- */
+/* About */
 .section {
   padding: 90px 0;
   border-top: 1px solid var(--border-color);
@@ -305,7 +304,7 @@ main {
 }
 
 .about-copy {
-  max-width: 580px;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -313,7 +312,7 @@ main {
 
 .about-copy p {
   color: var(--color-fg);
-  font-size: clamp(16px, 1.8vw, 21px);
+  font-size: clamp(14px, 1.5vw, 20px);
   line-height: 1.45;
   letter-spacing: -.02em;
   margin: 0;
@@ -327,7 +326,7 @@ main {
 }
 
 .github-signin a {
-  font-size: clamp(15px, 1.6vw, 19px);
+  font-size: clamp(16px, 2.1vw, 24px);
   line-height: 1.4;
   font-weight: 600;
   color: var(--color-blue);
