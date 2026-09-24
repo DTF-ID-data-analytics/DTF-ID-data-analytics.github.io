@@ -1,0 +1,47 @@
+:root {
+  /* Core Palette Variables */
+  --navy: #002244;
+  --gold: #A88B3E;
+  --blue: #0080ff;
+  --purple: #8c00ff;
+  --paper: #1c1c1c;
+  --ink: #F5F4F0;
+
+  /* Darker font colors for Light Theme */
+  --blue-light: #003399;
+  --purple-light: #520088;
+  --gold-light: #5a4200;
+  --paper-light: #f3f1eb;
+  --ink-light: #151515;
+
+  /* Lighter font colors for Dark Theme */
+  --blue-dark: #3399ff;
+  --purple-dark: #b866ff;
+  --gold-dark: #d4af37;
+  --paper-dark: #1c1c1c;
+  --ink-dark: #F5F4F0;
+
+  /* Active Theme Mapping (Default Light) */
+  --bg-color: var(--paper-light);
+  --fg-color: var(--ink-light);
+
+  --color-blue: var(--blue-light);
+  --color-purple: var(--purple-light);
+  --color-gold: var(--gold-light);
+
+  --border-color: rgba(21, 21, 21, 0.18);
+  
+  --mx: 50vw;
+}
+
+/* Explicit Dark Theme Mapping - Sets font to lighter (#F5F4F0) */
+body.dark-mode {
+  --bg-color: var(--paper-dark);
+  --fg-color: var(--ink-dark);
+
+  --color-blue: var(--blue-dark);
+  --color-purple: var(--purple-dark);
+  --color-gold: var(--gold-dark);
+
+  --border-color: rgba(245, 244, 240, 0.2);
+}

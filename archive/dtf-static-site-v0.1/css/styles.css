@@ -1,0 +1,188 @@
+/* Department of Treasury and Finance — Infrastructure Division / Data Analytics Team
+   Base styles */
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Public Sans', system-ui, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f4f5f6;
+  color: #0f1419;
+}
+
+a {
+  color: #0060a8;
+}
+
+a:hover {
+  color: #004a82;
+}
+
+.top-bar {
+  height: 6px;
+  background: linear-gradient(90deg, #0060a8, #6b3fa0);
+  width: 100%;
+}
+
+/* Hero */
+
+.hero {
+  padding: 56px 24px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-inner {
+  max-width: 760px;
+  text-align: center;
+}
+
+.hero-kicker {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #0060a8;
+  margin-bottom: 28px;
+}
+
+.hero-title {
+  margin: 0;
+  font-size: 44px;
+  line-height: 1.18;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.hero-divider {
+  width: 64px;
+  height: 3px;
+  background: linear-gradient(90deg, #0060a8, #6b3fa0);
+  margin: 28px auto;
+  border-radius: 2px;
+}
+
+.hero-sub {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.35;
+  font-weight: 500;
+  color: #3a444d;
+}
+
+.hero-sub + .hero-sub {
+  margin-top: 6px;
+}
+
+/* Dashboard section */
+
+.dashboard {
+  flex: 1;
+  padding: 24px 24px 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dashboard-inner {
+  max-width: 1180px;
+  width: 100%;
+}
+
+.dashboard-head {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.dashboard-head h2 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  color: #1a1f29;
+}
+
+.dashboard-head p {
+  margin: 8px 0 0;
+  font-size: 15px;
+  color: #5c6570;
+}
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.chart-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px 24px 18px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+}
+
+.chart-card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 2px;
+}
+
+.chart-card-head h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1f29;
+}
+
+.tag {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 20px;
+}
+
+.tag-blue {
+  color: #0060a8;
+  background: #e8f0fa;
+}
+
+.tag-purple {
+  color: #6b3fa0;
+  background: #f1e9f8;
+}
+
+.chart-card-desc {
+  margin: 2px 0 12px;
+  font-size: 13px;
+  color: #7a8390;
+}
+
+.chart-mount {
+  width: 100%;
+}
+
+.chart-mount-canvas {
+  position: relative;
+  height: 260px;
+}
+
+.chart-source {
+  margin: 14px 0 0;
+  font-size: 11px;
+  color: #9aa2ac;
+}
+
+@media (max-width: 720px) {
+  .chart-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-title {
+    font-size: 32px;
+  }
+}
